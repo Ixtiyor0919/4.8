@@ -14,6 +14,6 @@ async function getTodo(id) {
     return result
 }
 function getMovies(title) {
-    return fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${title}`)
+    return fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${title}`)
         .then(res => res.json())
 }
