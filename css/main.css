@@ -11,12 +11,13 @@ body {
     box-shadow: -17px 20px 50px -11px #1c1a1a;
 }
 .movies-container {
+    height: 530px;
     padding: 30px;
     border-radius: 10px;
     box-shadow: -17px 20px 50px -11px #1c1a1a;
 }
 .movie-container {
-    height: 520px;
+    height: 460px;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 15px;

@@ -55,12 +55,12 @@ function createCloneTodo(todo) {
     let templateTodoEl = document.querySelector('#todo-item');
     let cloneTodoItem = templateTodoEl.content.cloneNode(true);
     
-    cloneTodoItem.querySelector('.todo-id').textContent = 'id: ' + todo.id;
-    cloneTodoItem.querySelector('.todo-title').textContent = todo.title;
-    cloneTodoItem.querySelector('.todo-year').textContent = todo.year + '-y.';
+    cloneTodoItem.querySelector('.todo-id').textContent = 'id: ' + todo.imdbID;
+    cloneTodoItem.querySelector('.todo-title').textContent = todo.Title;
+    cloneTodoItem.querySelector('.todo-year').textContent = todo.Year + '-y.';
     
     let deleteBtn = cloneTodoItem.querySelector('.todo-delete-btn');
-    deleteBtn.dataset.todoId = todo.id;
+    deleteBtn.dataset.todoId = todo.imdbID;
     deleteBtn.dataset.task = 'delete';
     return cloneTodoItem;
     
@@ -83,23 +83,23 @@ function cloneAndRender(movie) {
     // movieItemElClone.querySelector('[data-element=movie-title]').textContent = `Title: ` + movie.title;
     // movieItemElClone.querySelector('[data-element=movie-year]').textContent = `Year: ` + movie.year;
 
-    movieItemElClone.querySelector('[data-element=movie-id-films]').textContent = `id: ` + movie.imdbID;
+    // movieItemElClone.querySelector('[data-element=movie-id-films]').textContent = `id: ` + movie.imdbID;
     movieItemElClone.querySelector('[data-element=movie-title-films]').textContent = `Title: ` + movie.Title;
     movieItemElClone.querySelector('[data-element=movie-year-films]').textContent = `year: ` + movie.Year;
-    movieItemElClone.querySelector('[data-element=movie-type]').textContent = `type: ` + movie.Type;
+    // movieItemElClone.querySelector('[data-element=movie-type]').textContent = `type: ` + movie.Type;
 
     let movieInfoBtn = movieItemElClone.querySelector('[data-element=movie-info]');
     movieInfoBtn.textContent = 'More info';
-    movieInfoBtn.dataset.todoId = movie.id
+    movieInfoBtn.dataset.todoId = movie.imdbID
     movieInfoBtn.dataset.task = 'Info'
 
     let movieBtn = movieItemElClone.querySelector('[data-element=movie-bookmark]');
     movieBtn.textContent = 'Bookmark';
-    movieBtn.dataset.todoId = movie.id
+    movieBtn.dataset.todoId = movie.imdbID
     movieBtn.dataset.task = 'bookmark'
     movieBtn.addEventListener("click", (event) => {
         films.forEach((movie) => {
-            if(event.target.dataset.todoId == movie.id) {
+            if(event.target.dataset.todoId == movie.imdbID) {
                 bookmarkedMovie.push(movie);
             };
         });
@@ -141,13 +141,13 @@ document.body.addEventListener('click', (event) => {
     // renderPagination();
     
     if(clickedEl.dataset.task === 'delete') {
-        bookmarkedMovie = bookmarkedMovie.filter(movie => movie.id != event.target.dataset.todoId)
+        bookmarkedMovie = bookmarkedMovie.filter(movie => movie.imdbID != event.target.dataset.todoId)
         renderBookmarkTodos(bookmarkedMovie, todoListEl);
     }//ishladi
 
     if(clickedEl.dataset.task === 'Info') {
         let todoId = clickedEl.dataset.todoId;
-        let todo = films.find(item => item.id == todoId)
+        let todo = films.find(item => item.imdbID == todoId)
         let content = createModalInfo(todo);
         let modal = renderModal(content);
         document.body.appendChild(modal)
@@ -163,20 +163,20 @@ function createModalInfo(movie) {
     let modalTemplate = document.querySelector('#modal-template');
     let modalEl = modalTemplate.content.cloneNode(true);
     let modalImg = modalEl.querySelector('.movie-modal-img');
-    modalImg.src = movie.imageUrl;
+    modalImg.src = movie.Poster;
     modalImg.addEventListener('error', () => {
         modalImg.src = 'http://picsum.photos/200/200';
     })
-    modalId = modalEl.querySelector('.movie-modal-id').textContent = movie.id;
-    modalTitle = modalEl.querySelector('.movie-modal-title').textContent = movie.title;
-    modalDirector = modalEl.querySelector('.movie-modal-director').textContent = movie.director;
-    modalActors = modalEl.querySelector('.movie-modal-actors').textContent = movie.actors;
-    modalGenres = modalEl.querySelector('.movie-modal-genres').textContent = movie.genres;
-    modalDescription = modalEl.querySelector('.movie-modal-description').textContent = movie.description;
-    modalYear = modalEl.querySelector('.movie-modal-year').textContent = movie.year;
+    modalId = modalEl.querySelector('.movie-modal-id').textContent = movie.imdbID;
+    modalTitle = modalEl.querySelector('.movie-modal-title').textContent = movie.Title;
+    // modalDirector = modalEl.querySelector('.movie-modal-director').textContent = movie.director;
+    // modalActors = modalEl.querySelector('.movie-modal-actors').textContent = movie.actors;
+    // modalGenres = modalEl.querySelector('.movie-modal-genres').textContent = movie.genres;
+    modalDescription = modalEl.querySelector('.movie-modal-description').textContent = movie.Type;
+    modalYear = modalEl.querySelector('.movie-modal-year').textContent = movie.Year;
     
     let modalBtn = modalEl.querySelector('.movie-modal-btn');
-    modalBtn.dataset.todoId = movie.id
+    modalBtn.dataset.todoId = movie.imdbID
     modalBtn.dataset.task = 'delete';
     return modalEl
 }
@@ -207,6 +207,7 @@ todoForm.addEventListener('submit', (event) => {
             films.innerHTML = false;
             movie.forEach((move) => {
                 films.push(move)
+                todoInput.value = '';
                 renderMovies(films, moviesRow)
                 renderPagination();
             })
@@ -246,10 +247,10 @@ function sortAndRender(sortType = 1, sortBy = 1) {
     bookmarkedMovie = bookmarkedMovie.sort((a, b) => {
         switch(sortBy) {
             case 1:
-                return sortType * (a.id - b.id);
-                case 2: return sortType * (a.title.charCodeAt() - b.title.charCodeAt());
-                case 3: return sortType * ( a.year - b.year);
-            default: return sortType *(a.id - b.id);
+                return sortType * (a.imdbID - b.imdbID);
+                case 2: return sortType * (a.Title.charCodeAt() - b.Title.charCodeAt());
+                case 3: return sortType * ( a.Year - b.Year);
+            default: return sortType *(a.imdbID - b.imdbID);
         }
     })
     renderSortBookmarkedMovies(bookmarkedMovie);

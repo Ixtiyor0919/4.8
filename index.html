@@ -14,23 +14,23 @@
             <div class="border form-top-wrapper mb-3">
                 <div class="d-flex align-items-center mt-3 w-100 mb-2 m-auto">
                     <div class="col-9 me-auto">
-                        <input class="form-control bg-secondary" type="text" placeholder="Movies">
+                        <input class="form-control bg-secondary" type="text" placeholder="Search movies">
                     </div>
-                    <button class="btn btn-success col-2">Add</button>
+                    <button class="btn btn-success col-2">Search</button>
                 </div>
-                <div class="d-flex align-items-center mt-3 w-100 mb-2 m-auto">
+                <!-- <div class="d-flex align-items-center mt-3 w-100 mb-2 m-auto">
                     <div class="col-9 me-auto">
                         <input class="form-control bg-secondary" type="text" placeholder="Search movies">
                     </div>
                     <button class="btn btn-primary col-2">Search</button>
-                </div>
+                </div> -->
                 <div class="w-100 m-auto mb-3">
-                    <div class="w-100 mb-2 boxSelects">
+                    <!-- <div class="w-100 mb-2 boxSelects">
                         <select data-element="sort-type" class="form-select optsGreaterOrLess bg-secondary text-light">
                             <option disabled selected>Movie genres</option>
                             <option value=""></option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="w-100 mb-2 boxSelects">
                         <select data-element="sort-type" class="form-select optsGreaterOrLess bg-secondary text-light">
                             <option disabled selected>Tartiblash</option>
@@ -52,8 +52,8 @@
         </form>
         <div class="w-75 mt-auto movies-container">
             <div data-element="movie-container" class="row g-3 pb-2 movie-container justify-content-center bg-light"></div>
-            <div class="mt-3">
-                <ul class="pagination todo-pagination mb-0 justify-content-center mt-4"></ul>
+            <div class="mt-2">
+                <ul class="pagination todo-pagination justify-content-center mt-2 mb-2"></ul>
             </div>
         </div>
     </div>
@@ -126,7 +126,7 @@
     </template> -->
     <template id="modal-template">
             <img src="" alt="" class="movie-modal-img">
-            <span class="movie-modal-id text-black"></span>
+            <p class="movie-modal-id text-black fw-bold"></p>
             <h3 class="movie-modal-title"></h3>
             <h4 class="movie-modal-director"></h4>
             <h5 class="movie-modal-actors"></h5>
